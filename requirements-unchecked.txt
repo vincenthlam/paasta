@@ -1,0 +1,2 @@
+git+git://github.com/vkhromov/http-parser.git@2306df28fbd7946036a2609776a77833f5dda81e#egg=http-parser
+pymesos==0.3.9

@@ -15,7 +15,7 @@
 FROM ubuntu:xenial
 RUN sed -i 's/archive.ubuntu.com/us-east1.gce.archive.ubuntu.com/g' /etc/apt/sources.list
 
-# Need Python 3.6
+# Need Python 3.7
 RUN apt-get update > /dev/null && \
     apt-get install -y --no-install-recommends software-properties-common && \
     add-apt-repository ppa:deadsnakes/ppa
@@ -24,19 +24,20 @@ RUN apt-get update > /dev/null && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         gcc \
         git \
-        python3.6-dev \
+        python3.7-dev \
         libffi-dev \
         libssl-dev \
         libyaml-dev \
+        build-essential \
         virtualenv > /dev/null \
     && apt-get clean > /dev/null
 
 WORKDIR /work
 
-ADD requirements.txt /work/
-RUN virtualenv /venv -ppython3.6
+ADD requirements.txt requirements-unchecked.txt /work/
+RUN virtualenv /venv -ppython3.7
 ENV PATH=/venv/bin:$PATH
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt -r requirements-unchecked.txt
 
 COPY yelp_package/dockerfiles/xenial/mesos-slave-secret /etc/
 COPY yelp_package/dockerfiles/itest/api/mesos-cli.json yelp_package/dockerfiles/xenial/mesos-slave-secret /nail/etc/

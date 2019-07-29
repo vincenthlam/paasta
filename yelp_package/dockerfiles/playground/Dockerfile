@@ -13,10 +13,10 @@ RUN mkdir -p /var/log/paasta_logs /var/run/sshd /nail/etc
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 RUN ln -s /etc/paasta/mesos-cli.json /nail/etc/mesos-cli.json
 
-ADD requirements.txt requirements-dev.txt /paasta/
-RUN virtualenv /venv -ppython3.6
+ADD requirements.txt requirements-unchecked.txt requirements-dev.txt /paasta/
+RUN virtualenv /venv -ppython3.7
 ENV PATH=/venv/bin:$PATH
-RUN pip install -r /paasta/requirements.txt
+RUN pip install -r /paasta/requirements.txt -r /paasta/requirements-unchecked.txt
 
 ADD ./yelp_package/dockerfiles/playground/start.sh /start.sh
 ADD ./yelp_package/dockerfiles/playground/setup-ssh.sh /setup-ssh.sh

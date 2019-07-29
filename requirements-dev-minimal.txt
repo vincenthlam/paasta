@@ -1,9 +1,11 @@
 astroid
 asynctest
+cython
 docutils
 flake8
 freezegun
 hypothesis
+importlib-resources
 mock
 path.py
 pep8
