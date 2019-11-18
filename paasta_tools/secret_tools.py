@@ -56,7 +56,7 @@ def get_hmac_for_secret(
                     " file".format(secret_environment)
                 )
                 return None
-    except IOError:
+    except OSError:
         print(f"Failed to open json secret at {secret_path}")
         return None
     except json.decoder.JSONDecodeError:

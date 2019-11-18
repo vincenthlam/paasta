@@ -580,7 +580,7 @@ def _load_mesos_secret():
     try:
         with open(DEFAULT_SPARK_MESOS_SECRET_FILE, "r") as f:
             return f.read()
-    except IOError:
+    except OSError:
         paasta_print(
             "Cannot load mesos secret from %s" % DEFAULT_SPARK_MESOS_SECRET_FILE,
             file=sys.stderr,

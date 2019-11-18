@@ -1529,7 +1529,7 @@ class FileLogWriter(LogWriter):
             with io.FileIO(path, mode=self.mode, closefd=True) as f:
                 with self.maybe_flock(f):
                     f.write(message.encode("UTF-8"))
-        except IOError as e:
+        except OSError as e:
             paasta_print(
                 "Could not log to {}: {}: {} -- would have logged: {}".format(
                     path, type(e).__name__, str(e), message
@@ -1801,7 +1801,7 @@ def load_system_paasta_config(
             }
         )
         return parse_system_paasta_config(file_stats, path)
-    except IOError as e:
+    except OSError as e:
         raise PaastaNotConfiguredError(
             f"Could not load system paasta config file {e.filename}: {e.strerror}"
         )
@@ -2323,7 +2323,7 @@ def _run(
         if stdin_interrupt:
 
             def signal_handler(signum: int, frame: FrameType) -> None:
-                process.stdin.write("\n".encode("utf-8"))
+                process.stdin.write(b"\n")
                 process.stdin.flush()
                 process.wait()
 
@@ -2568,7 +2568,7 @@ def get_soa_cluster_deploy_files(
                 if cluster_re_match is not None:
                     cluster = cluster_re_match.group(2)
                     yield (cluster, yaml_file)
-        except IOError as err:
+        except OSError as err:
             print(f"Error opening {yaml_file}: {err}")
 
 
@@ -3255,7 +3255,7 @@ def prompt_pick_one(sequence: Collection[str], choosing: str) -> str:
         )
         sys.exit(1)
 
-    global_actions = [str("quit")]
+    global_actions = ["quit"]
     choices = [(item, item) for item in sequence]
 
     if len(choices) == 1:
@@ -3271,7 +3271,7 @@ def prompt_pick_one(sequence: Collection[str], choosing: str) -> str:
         paasta_print("")
         sys.exit(1)
 
-    if isinstance(result, tuple) and result[1] == str("quit"):
+    if isinstance(result, tuple) and result[1] == "quit":
         sys.exit(1)
     else:
         return result

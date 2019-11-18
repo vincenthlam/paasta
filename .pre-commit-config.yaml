@@ -27,10 +27,10 @@ repos:
     -   id: reorder-python-imports
         args: [--py3-plus]
 -   repo: https://github.com/asottile/pyupgrade
-    rev: v1.12.0
+    rev: v1.25.1
     hooks:
     -   id: pyupgrade
-        args: [--py36-plus]
+        args: [--py37-plus]
 -   repo: https://github.com/psf/black
     rev: 19.10b0
     hooks:

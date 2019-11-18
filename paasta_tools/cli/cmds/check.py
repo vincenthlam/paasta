@@ -237,7 +237,7 @@ def deployments_check(service, soa_dir):
             % x_mark()
         )
         paasta_print("  by any marathon or adhoc instance:")
-        paasta_print("  %s" % PaastaColors.bold((", ".join(in_deploy_not_frameworks))))
+        paasta_print("  %s" % PaastaColors.bold(", ".join(in_deploy_not_frameworks)))
         paasta_print(
             "  You should probably delete these deploy.yaml entries if they are unused."
         )

@@ -71,8 +71,8 @@ def paasta_sysdig(args):
             cluster=args.cluster, system_paasta_config=system_paasta_config
         )
         ssh_cmd = (
-            "ssh -At -o StrictHostKeyChecking=no -o LogLevel=QUIET {0} "
-            '"sudo paasta {1} --local"'
+            "ssh -At -o StrictHostKeyChecking=no -o LogLevel=QUIET {} "
+            '"sudo paasta {} --local"'
         ).format(mesos_master, " ".join(sys.argv[1:]))
         return_code, output = _run(ssh_cmd)
         if return_code != 0:

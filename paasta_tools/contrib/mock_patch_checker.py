@@ -25,7 +25,7 @@ class MockChecker(ast.NodeVisitor):
                 except SyntaxError as error:
                     print("SyntaxError on file %s:%d" % (filename, error.lineno))
                     return
-        except IOError:
+        except OSError:
             print("Error opening filename: %s" % filename)
             return
         self.init_module_imports()

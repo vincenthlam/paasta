@@ -857,7 +857,7 @@ def setup_service(
         marathon_app_dict = job_config.format_marathon_app_dict()
     except NoDockerImageError:
         error_msg = (
-            "Docker image for {0}.{1} not in deployments.json. Exiting. Has Jenkins deployed it?\n"
+            "Docker image for {}.{} not in deployments.json. Exiting. Has Jenkins deployed it?\n"
         ).format(service, instance)
         log.error(error_msg)
         return (1, error_msg, None)

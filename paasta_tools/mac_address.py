@@ -38,7 +38,7 @@ def obtain_lock(lock_filepath):
     try:
         fcntl.flock(lock_file, fcntl.LOCK_EX | fcntl.LOCK_NB)
         return lock_file
-    except IOError as err:
+    except OSError as err:
         if err.errno != errno.EAGAIN:
             raise
         lock_file.close()

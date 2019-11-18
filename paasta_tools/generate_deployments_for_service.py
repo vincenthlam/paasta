@@ -246,7 +246,7 @@ def generate_deployments_for_service(service: str, soa_dir: str) -> None:
     try:
         with open(os.path.join(soa_dir, service, TARGET_FILE), "r") as oldf:
             old_deployments_dict = json.load(oldf)
-    except (IOError, ValueError):
+    except (OSError, ValueError):
         old_deployments_dict = {}
     mappings, v2_mappings = get_deploy_group_mappings(soa_dir=soa_dir, service=service)
 

@@ -629,7 +629,7 @@ def check_if_port_free(port):
     temp_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
         temp_socket.bind(("127.0.0.1", port))
-    except socket.error:
+    except OSError:
         return False
     finally:
         temp_socket.close()

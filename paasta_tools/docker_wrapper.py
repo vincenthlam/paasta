@@ -186,7 +186,7 @@ def get_cpumap():
                         cpumap[cpuid] = []
                     cpumap[cpuid].append(core)
                     core += 1
-    except IOError:
+    except OSError:
         logging.warning("Error while trying to read cpuinfo")
         pass
     return cpumap
@@ -201,7 +201,7 @@ def get_numa_memsize(nb_nodes):
                 m = re.match(r"MemTotal:\s*(\d+)\skB", line)
                 if m:
                     return int(m.group(1)) / 1024 / int(nb_nodes)
-    except IOError:
+    except OSError:
         logging.warning("Error while trying to read meminfo")
         pass
     return 0

@@ -1308,7 +1308,7 @@ def wait_for_deployment(
                 raise KeyboardInterrupt
 
             finished_instances = total_instances - sum(
-                (c.instances_queue.qsize() for c in clusters_data)
+                c.instances_queue.qsize() for c in clusters_data
             )
             bar.update(finished_instances)
             if progress is not None:
@@ -1317,7 +1317,7 @@ def wait_for_deployment(
                     c.cluster: list(c.instances_queue.queue) for c in clusters_data
                 }
 
-            if all((cluster.instances_queue.empty() for cluster in clusters_data)):
+            if all(cluster.instances_queue.empty() for cluster in clusters_data):
                 sys.stdout.flush()
                 if progress is not None:
                     progress.percent = 100.0

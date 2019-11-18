@@ -192,7 +192,7 @@ def _smartstack_rules(conf, soa_dir, synapse_service_dir):
         # synapse backends
         try:
             backends = _synapse_backends(synapse_service_dir, namespace)
-        except (OSError, IOError, ValueError):
+        except (OSError, ValueError):
             # Don't fatal if something goes wrong loading the synapse files
             log.exception(f"Unable to load backend {namespace}")
             backends = ()
@@ -316,7 +316,7 @@ def active_service_groups():
 
 
 def _dns_servers():
-    with io.open(RESOLV_CONF) as f:
+    with open(RESOLV_CONF) as f:
         for line in f:
             parts = line.split()
             if (
